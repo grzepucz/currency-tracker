@@ -17,5 +17,9 @@ public interface LatestDataProviderAPI {
     Call<LatestResponse> getLatestWithSymbols(@Query("access_key") String secret, @Query("symbols") String symbols);
 
     @POST("latest")
-    Call<LatestResponse> getLatestWithBaseAndSymbols(@Query("access_key") String secret, @Query("base") String base, @Query("symbols") String symbols);
+    Call<LatestResponse> getLatestWithBaseAndSymbols(
+            @Query("access_key") String secret,
+            @Query("base") String base,
+            @Query("symbols") String symbols
+    );
 }

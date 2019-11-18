@@ -20,7 +20,7 @@ public class LatestResponse extends RequestResponse implements Serializable
     public Boolean success;
     @SerializedName("timestamp")
     @Expose
-    public Integer timestamp;
+    public String timestamp;
     @SerializedName("base")
     @Expose
     public String base;
