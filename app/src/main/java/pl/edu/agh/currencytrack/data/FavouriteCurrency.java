@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey;
 
 import lombok.AllArgsConstructor;
 
-@Entity(tableName = "currency")
-public class Currency {
-    @PrimaryKey
+@Entity(tableName = "favourites")
+public class FavouriteCurrency {
+    @PrimaryKey(autoGenerate = true)
     public int uid;
 
     @ColumnInfo(name = "short_name")
@@ -21,16 +21,21 @@ public class Currency {
     @ColumnInfo(name = "icon")
     public String icon;
 
-    public Currency(int uid, String shortName, String longName, String icon) {
+    @ColumnInfo(name = "observed")
+    public Boolean isObserved;
+
+    public FavouriteCurrency(int uid, String shortName, String longName, String icon, Boolean isObserved) {
         this.uid = uid;
         this.shortName = shortName;
         this.longName = longName;
         this.icon = icon;
+        this.isObserved = isObserved;
     }
     @Ignore
-    public Currency(String shortName, String longName, String icon) {
+    public FavouriteCurrency(String shortName, String longName, String icon, Boolean isObserved) {
         this.shortName = shortName;
         this.longName = longName;
         this.icon = icon;
+        this.isObserved = isObserved;
     }
 }

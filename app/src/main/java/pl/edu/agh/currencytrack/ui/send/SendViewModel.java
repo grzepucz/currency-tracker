@@ -1,16 +1,16 @@
-package pl.edu.agh.currencytrack.ui.notifications;
+package pl.edu.agh.currencytrack.ui.send;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class SendViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public SendViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is send fragment");
     }
 
     public LiveData<String> getText() {

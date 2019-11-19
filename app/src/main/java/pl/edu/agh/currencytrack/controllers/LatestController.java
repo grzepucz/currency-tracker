@@ -32,7 +32,7 @@ public class LatestController extends Controller implements Callback<LatestRespo
         call.enqueue(this);
     }
 
-    public void processLatestWithSymbolsRequest() {
+    public void processLatestWithBaseRequest(String base) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -44,7 +44,39 @@ public class LatestController extends Controller implements Callback<LatestRespo
 
         LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
 
-        Call<LatestResponse> call = fixer.getLatestWithSymbols(this.secret, "USD,PLN,EUR,AUD");
+        Call<LatestResponse> call = fixer.getLatestWithBase(this.secret, base);
+        call.enqueue(this);
+    }
+
+    public void processLatestWithSymbolsRequest(String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
+
+        Call<LatestResponse> call = fixer.getLatestWithSymbols(this.secret, symbols);
+        call.enqueue(this);
+    }
+
+    public void processLatestWithBaseAndSymbolsRequest(String base, String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
+
+        Call<LatestResponse> call = fixer.getLatestWithBaseAndSymbols(this.secret, base, symbols);
         call.enqueue(this);
     }
 

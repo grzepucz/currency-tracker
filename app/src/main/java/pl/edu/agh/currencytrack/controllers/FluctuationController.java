@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FluctuationController extends Controller implements Callback<FluctuationResponse> {
     private FluctuationResponse fluctuation;
 
-    public void processFluctuationResponse() {
+    public void processFluctuationFromToResponse(String from, String to) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -28,8 +28,56 @@ public class FluctuationController extends Controller implements Callback<Fluctu
 
         FluctuationDataProviderAPI fixer = retrofit.create(FluctuationDataProviderAPI.class);
 
-//        Call<FluctuationResponse> call = fixer.getLatest(this.secret);
-//        call.enqueue(this);
+        Call<FluctuationResponse> call = fixer.getFluctuationFromTo(this.secret, from, to);
+        call.enqueue(this);
+    }
+
+    public void processFluctuationFromToWithBaseRequest(String from, String to, String base) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        FluctuationDataProviderAPI fixer = retrofit.create(FluctuationDataProviderAPI.class);
+
+        Call<FluctuationResponse> call = fixer.getFluctuationFromToWithBase(this.secret, from, to, base);
+        call.enqueue(this);
+    }
+
+    public void processFluctuationFromToWithSymbolsRequest(String from, String to, String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        FluctuationDataProviderAPI fixer = retrofit.create(FluctuationDataProviderAPI.class);
+
+        Call<FluctuationResponse> call = fixer.getFluctuationFromToWithSymbols(this.secret, from, to, symbols);
+        call.enqueue(this);
+    }
+
+    public void processFluctuationFromToWithBaseAndSymbolsRequest(String from, String to, String base, String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        FluctuationDataProviderAPI fixer = retrofit.create(FluctuationDataProviderAPI.class);
+
+        Call<FluctuationResponse> call = fixer.getFluctuationFromToWithBaseAndSymbols(this.secret, from, to, base, symbols);
+        call.enqueue(this);
     }
 
     @Override

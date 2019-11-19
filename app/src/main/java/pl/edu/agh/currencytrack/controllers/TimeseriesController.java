@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TimeseriesController extends Controller implements Callback<TimeseriesResponse> {
     private TimeseriesResponse timeseries;
 
-    public void processTimeseriesRequest() {
+    public void processTimeseriesFromToRequest(String from, String to) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -28,14 +28,62 @@ public class TimeseriesController extends Controller implements Callback<Timeser
 
         TimeSeriesDataProviderAPI fixer = retrofit.create(TimeSeriesDataProviderAPI.class);
 
-        //Call<TimeseriesResponse> call = fixer.getLatest(this.secret);
-        //call.enqueue(this);
+        Call<TimeseriesResponse> call = fixer.getTimeseriesFromTo(this.secret, from, to);
+        call.enqueue(this);
+    }
+
+    public void processTimeseriesFromToWithBaseRequest(String from, String to, String base) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        TimeSeriesDataProviderAPI fixer = retrofit.create(TimeSeriesDataProviderAPI.class);
+
+        Call<TimeseriesResponse> call = fixer.getTimeseriesFromToWithBase(this.secret, from, to, base);
+        call.enqueue(this);
+    }
+
+    public void processTimeseriesFromToWithSymbolsRequest(String from, String to, String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        TimeSeriesDataProviderAPI fixer = retrofit.create(TimeSeriesDataProviderAPI.class);
+
+        Call<TimeseriesResponse> call = fixer.getTimeseriesFromToWithSymbols(this.secret, from, to, symbols);
+        call.enqueue(this);
+    }
+
+    public void processTimeseriesFromToWithBaseAndSymbolsRequest(String from, String to, String base, String symbols) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://data.fixer.io/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        TimeSeriesDataProviderAPI fixer = retrofit.create(TimeSeriesDataProviderAPI.class);
+
+        Call<TimeseriesResponse> call = fixer.getTimeseriesFromToWithBaseAndSymbols(this.secret, from, to, base, symbols);
+        call.enqueue(this);
     }
 
     @Override
     public void onResponse(Call<TimeseriesResponse> call, Response<TimeseriesResponse> response) {
         if(response.isSuccessful()) {
-            TimeseriesResponse latest = response.body();
+            TimeseriesResponse timeseries = response.body();
 //            System.out.println(latest.rates.size());
 //            System.out.println(latest.rates.get("USD"));
         } else {
