@@ -32,7 +32,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.android.support:design:27.1.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-rc01'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -48,8 +47,6 @@ dependencies {
     annotationProcessor('org.projectlombok:lombok:1.18.10')
     implementation "androidx.room:room-runtime:2.2.1"
     annotationProcessor "androidx.room:room-compiler:2.2.1"
-    // For Kotlin use kapt instead of annotationProcessor
-
     compileOnly "org.projectlombok:lombok:1.18.10"
     implementation group: 'commons-io', name: 'commons-io', version: '2.4'
     testImplementation 'junit:junit:4.12'

@@ -17,7 +17,7 @@ public interface FavouritesCurrencyDAO {
     @Query("SELECT * FROM favourites")
     List<FavouriteCurrency> getAll();
 
-    @Query("SELECT * FROM favourites WHERE observed = 'true'")
+    @Query("SELECT * FROM favourites WHERE observed = 1")
     List<FavouriteCurrency> getAllObserved();
 
     @Query("SELECT * FROM favourites WHERE uid IN (:currenciesIds)")

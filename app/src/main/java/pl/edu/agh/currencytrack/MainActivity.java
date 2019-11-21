@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "What would You do if You would found 100$ on the street?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        DbHelperExecutor.populateAsync(AppDatabase.getDatabase(this));
+        DbHelperExecutor.populateInitAsync(AppDatabase.getDatabase(this));
 
         //List<FavouriteCurrency> list = new ArrayList<FavouriteCurrency>(mDb.currencyDao().getAll().getValue());
 //        ConvertController convertController = new ConvertController();

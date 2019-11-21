@@ -5,8 +5,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
-
 @Entity(tableName = "favourites")
 public class FavouriteCurrency {
     @PrimaryKey(autoGenerate = true)
