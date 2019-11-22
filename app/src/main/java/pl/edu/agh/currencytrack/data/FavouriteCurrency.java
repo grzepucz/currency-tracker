@@ -8,19 +8,19 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "favourites")
 public class FavouriteCurrency {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    private int uid;
 
     @ColumnInfo(name = "short_name")
-    public String shortName;
+    private String shortName;
 
     @ColumnInfo(name = "long_name")
-    public String longName;
+    private String longName;
 
     @ColumnInfo(name = "icon")
-    public String icon;
+    private String icon;
 
     @ColumnInfo(name = "observed")
-    public Boolean isObserved;
+    private Boolean isObserved;
 
     public FavouriteCurrency(int uid, String shortName, String longName, String icon, Boolean isObserved) {
         this.uid = uid;
@@ -36,4 +36,50 @@ public class FavouriteCurrency {
         this.icon = icon;
         this.isObserved = isObserved;
     }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getLongName() {
+        return longName;
+    }
+
+    public void setLongName(String longName) {
+        this.longName = longName;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getObserved() {
+        return isObserved;
+    }
+
+    public void setObserved(Boolean observed) {
+        isObserved = observed;
+    }
+
+    public FavouriteCurrency changeObservable() {
+        setObserved(!isObserved);
+        return this;
+    }
+
 }

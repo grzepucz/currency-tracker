@@ -21,7 +21,13 @@ public interface FavouritesCurrencyDAO {
     List<FavouriteCurrency> getAllObserved();
 
     @Query("SELECT * FROM favourites WHERE uid IN (:currenciesIds)")
-    List<FavouriteCurrency> loadAllByIds(int[] currenciesIds);
+    List<FavouriteCurrency> loadAllByIds(List<Integer> currenciesIds);
+
+    @Query("SELECT * FROM favourites WHERE short_name IN (:currenciesShorts)")
+    List<FavouriteCurrency> loadAllByCode(List<String> currenciesShorts);
+
+    @Query("SELECT * FROM favourites WHERE uid = (:currencyId)")
+    FavouriteCurrency loadById(int currencyId);
 
     @Query("SELECT * FROM favourites WHERE short_name LIKE :shortName LIMIT 1")
     FavouriteCurrency findByShortName(String shortName);
@@ -38,8 +44,11 @@ public interface FavouritesCurrencyDAO {
     @Query("DELETE FROM favourites")
     void deleteAll();
 
+    @Query("UPDATE favourites SET observed = :isObserved WHERE uid = :id")
+    void updateObservable(int id, int isObserved);
+
     @Update
-    void update(FavouriteCurrency favouriteCurrency);
+    void updateAll(FavouriteCurrency... favouriteCurrencies);
 
     @Query("SELECT COUNT(*) from favourites")
     int countRows();
