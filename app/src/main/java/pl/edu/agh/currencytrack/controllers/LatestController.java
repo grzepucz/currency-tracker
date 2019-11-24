@@ -1,5 +1,7 @@
 package pl.edu.agh.currencytrack.controllers;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,7 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Getter
-public class LatestController extends Controller implements Callback<LatestResponse> {
+public class LatestController extends Controller {
     private LatestResponse latest;
 
     public void processLatestRequest() {
@@ -29,7 +31,17 @@ public class LatestController extends Controller implements Callback<LatestRespo
         LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
 
         Call<LatestResponse> call = fixer.getLatest(this.secret);
-        call.enqueue(this);
+        call.enqueue(new Callback<LatestResponse>() {
+            @Override
+            public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LatestResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void processLatestWithBaseRequest(String base) {
@@ -45,7 +57,17 @@ public class LatestController extends Controller implements Callback<LatestRespo
         LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
 
         Call<LatestResponse> call = fixer.getLatestWithBase(this.secret, base);
-        call.enqueue(this);
+        call.enqueue(new Callback<LatestResponse>() {
+            @Override
+            public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LatestResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void processLatestWithSymbolsRequest(String symbols) {
@@ -61,7 +83,17 @@ public class LatestController extends Controller implements Callback<LatestRespo
         LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
 
         Call<LatestResponse> call = fixer.getLatestWithSymbols(this.secret, symbols);
-        call.enqueue(this);
+        call.enqueue(new Callback<LatestResponse>() {
+            @Override
+            public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<LatestResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void processLatestWithBaseAndSymbolsRequest(String base, String symbols) {
@@ -77,23 +109,28 @@ public class LatestController extends Controller implements Callback<LatestRespo
         LatestDataProviderAPI fixer = retrofit.create(LatestDataProviderAPI.class);
 
         Call<LatestResponse> call = fixer.getLatestWithBaseAndSymbols(this.secret, base, symbols);
-        call.enqueue(this);
+        call.enqueue(new Callback<LatestResponse>() {
+
+            @Override
+            public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
+                if(response.isSuccessful()) {
+                    latest = (LatestResponse) response.body();
+                    System.out.println(latest.date);
+                    System.out.println(latest.base);
+                } else {
+                    System.out.println(response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LatestResponse> call, Throwable t) {
+
+            }
+        });
     }
 
-    @Override
-    public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
-        if(response.isSuccessful()) {
-            LatestResponse latest = response.body();
-            System.out.println(latest.rates.size());
-            System.out.println(latest.rates.get("USD"));
-        } else {
-            System.out.println(response.errorBody());
-        }
-    }
+    public void loadDataToView(LatestResponse response) {
 
-    @Override
-    public void onFailure(Call<LatestResponse> call, Throwable t) {
-        t.printStackTrace();
     }
 
     public LatestResponse getLatest() {

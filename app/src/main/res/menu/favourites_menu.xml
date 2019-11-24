@@ -5,6 +5,6 @@
         android:id="@+id/action_favourites_add"
         android:onClick="addNewFavouriteAction"
         android:orderInCategory="100"
-        android:title="@string/action_favourites_add"
+        android:title="@string/action_favourites_edit"
         app:showAsAction="always" />
 </menu>

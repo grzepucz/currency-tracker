@@ -62,6 +62,8 @@ public class NewFavouriteActivity extends AppCompatActivity {
                 } else {
                     showToast("No Selection");
                 }
+
+                finish();
             }
         });
     }
