@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import pl.edu.agh.currencytrack.R;
+import pl.edu.agh.currencytrack.data.ImageHelper;
 import pl.edu.agh.currencytrack.models.LatestResponse;
 
 public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHolder>  {
@@ -70,9 +71,8 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHo
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         void bind(final LatestResponse rate) {
-            System.out.println(rate.base);
             baseNameView.setText(rate != null ? rate.base : "undefined");
-            baseRateIconImageView.setImageResource((R.drawable.all)); // xdd
+            baseRateIconImageView.setImageBitmap(ImageHelper.ImageViaAssets(rate.base.toLowerCase() + ".png", context));
 
             List<String> list = new ArrayList<>();
             rate.rates.forEach((k, v) -> {

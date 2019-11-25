@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/baseRateIconImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:contentDescription="TODO"
             android:visibility="visible"
             app:srcCompat="@android:drawable/sym_def_app_icon"
@@ -30,12 +30,13 @@
         <TextView
             android:id="@+id/baseNameView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:layout_height="wrap_content"
+            android:paddingLeft="35px"
+            android:paddingTop="10px"
+            android:paddingRight="10px"
             android:textSize="24sp"
             android:textStyle="bold"
             android:visibility="visible"
-            app:fontFamily="serif"
             tools:layout_conversion_absoluteHeight="0dp"
             tools:layout_conversion_absoluteWidth="0dp"
             tools:layout_editor_absoluteX="0dp"
@@ -47,9 +48,10 @@
         android:id="@+id/ratesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/common_google_signin_btn_text_dark_pressed"
+        android:paddingStart="10dp"
         android:paddingLeft="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:visibility="invisible"
-        android:paddingStart="10dp" />
+        tools:visibility="invisible" />
 
 </LinearLayout>

@@ -84,8 +84,6 @@ public class FluctuationController extends Controller implements Callback<Fluctu
     public void onResponse(Call<FluctuationResponse> call, Response<FluctuationResponse> response) {
         if(response.isSuccessful()) {
             FluctuationResponse latest = response.body();
-//            System.out.println(latest.rates.size());
-//            System.out.println(latest.rates.get("USD"));
         } else {
             System.out.println(response.errorBody());
         }

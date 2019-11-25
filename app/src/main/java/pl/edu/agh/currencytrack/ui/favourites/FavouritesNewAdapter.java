@@ -1,6 +1,7 @@
 package pl.edu.agh.currencytrack.ui.favourites;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.FavouriteCurrency;
+import pl.edu.agh.currencytrack.data.ImageHelper;
+import android.content.res.AssetManager;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +76,7 @@ public class FavouritesNewAdapter extends RecyclerView.Adapter<FavouritesNewAdap
             isSelectedImageView.setVisibility(favourite.getObserved() ? View.VISIBLE : View.GONE);
             shortNameView.setText(favourite.getShortName());
             longNameView.setText(favourite.getLongName());
-            iconImageView.setImageResource(R.drawable.common_google_signin_btn_text_light_normal); // xdd
+            iconImageView.setImageBitmap(ImageHelper.ImageViaAssets(favourite.getIcon().toLowerCase(), context));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

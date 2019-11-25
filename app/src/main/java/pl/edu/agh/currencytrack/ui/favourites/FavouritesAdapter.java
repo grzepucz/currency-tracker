@@ -15,6 +15,7 @@ import java.util.List;
 
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.FavouriteCurrency;
+import pl.edu.agh.currencytrack.data.ImageHelper;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.SingleViewHolder>  {
 
@@ -65,7 +66,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Si
         void bind(final FavouriteCurrency favourite) {
             shortNameView.setText(favourite.getShortName());
             longNameView.setText(favourite.getLongName());
-            iconImageView.setImageResource(R.drawable.common_google_signin_btn_text_light_normal); // xdd
+            iconImageView.setImageBitmap(ImageHelper.ImageViaAssets(favourite.getIcon().toLowerCase(), context));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

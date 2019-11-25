@@ -8,14 +8,14 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="pl.edu.agh.currencytrack.ui.rates.RatesFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_rates"
         tools:layout="@layout/fragment_rates" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="pl.edu.agh.currencytrack.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="pl.edu.agh.currencytrack.ui.convert.ConvertFragment"
+        android:label="@string/menu_convert"
+        tools:layout="@layout/fragment_convert" />
 
     <fragment
         android:id="@+id/nav_favourites"
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/nav_tools"
         android:name="pl.edu.agh.currencytrack.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
+        android:label="@string/menu_historical"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
