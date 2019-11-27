@@ -16,8 +16,6 @@ import pl.edu.agh.currencytrack.R;
 
 public class ToolsFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =
