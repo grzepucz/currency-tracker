@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditNotificationActivity">
+
+    <Button
+        android:id="@+id/btnUpdateSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_margin="8dp"
+        android:background="#00FF06"
+        android:text="@string/update" />
+
+    <ImageView
+        android:id="@+id/currencyIcon"
+        android:layout_width="match_parent"
+        android:layout_height="194px"
+        android:contentDescription="TODO"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:padding="10dp"
+        android:scaleType="centerInside"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/currencyShortName"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/limitEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/type_notification_limit"
+        android:inputType="numberSigned|number|numberDecimal"
+        android:padding="10dp" />
+
+    <Switch
+        android:id="@+id/switchShouldNotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:padding="10dp"
+        android:text="Notify" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/toCurrencyIcon"
+            android:layout_width="194dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/btnSelectToCurrency"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/select_currency"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

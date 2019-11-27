@@ -74,7 +74,7 @@ public class NewFavouriteActivity extends AppCompatActivity {
     }
 
     private void createList() {
-        List<FavouriteCurrency> elements = DbHelperExecutor.getAllAsync(AppDatabase.getDatabase(this));
+        List<FavouriteCurrency> elements = DbHelperExecutor.getAllFavouritesAsync(AppDatabase.getDatabase(this));
         adapter.setFavourites(elements);
     }
 

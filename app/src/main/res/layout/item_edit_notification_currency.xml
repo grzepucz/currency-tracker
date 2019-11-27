@@ -22,13 +22,7 @@
         android:layout_width="176dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/longNameView"
-        android:layout_width="358dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:padding="15dp"
         android:textSize="18sp" />
 
     <ImageView
@@ -40,4 +34,5 @@
         android:visibility="gone"
         app:srcCompat="@android:drawable/checkbox_on_background"
         tools:srcCompat="@android:drawable/checkbox_on_background" />
+
 </LinearLayout>

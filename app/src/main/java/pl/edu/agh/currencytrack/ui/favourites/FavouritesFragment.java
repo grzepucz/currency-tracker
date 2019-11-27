@@ -1,7 +1,8 @@
 package pl.edu.agh.currencytrack.ui.favourites;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.annotation.RequiresApi;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,18 +25,21 @@ import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.AppDatabase;
 import pl.edu.agh.currencytrack.data.DbHelperExecutor;
 import pl.edu.agh.currencytrack.data.FavouriteCurrency;
+import pl.edu.agh.currencytrack.data.NotificationLimit;
 
 public class FavouritesFragment extends Fragment {
 
     private FavouritesAdapter favouritesAdapter;
     private RecyclerView favouritesRecyclerView;
     private List<FavouriteCurrency> favourites = new ArrayList<>();
+    private List<NotificationLimit> notifications = new ArrayList<>();
     private AppDatabase mDb;
 
     public static FavouritesFragment newInstance() {
         return new FavouritesFragment();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -46,7 +50,7 @@ public class FavouritesFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        favouritesAdapter = new FavouritesAdapter(this.getContext(), favourites);
+        favouritesAdapter = new FavouritesAdapter(this.getContext(), favourites, notifications);
         recyclerView.setAdapter(favouritesAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         createList();
@@ -59,15 +63,25 @@ public class FavouritesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onResume() {
         super.onResume();
         createList();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void createList() {
-        List<FavouriteCurrency> elements = DbHelperExecutor.getAllObservedAsync(AppDatabase.getDatabase(this.getContext()));
-        favouritesAdapter.setFavourites(elements);
+        List<FavouriteCurrency> favourites = DbHelperExecutor.getAllObservedAsync(AppDatabase.getDatabase(this.getContext()));
+        favouritesAdapter.setFavourites(favourites);
+
+        List<String> notifications = new ArrayList<>();
+        for (FavouriteCurrency i : favourites) {
+            notifications.add(i.getShortName());
+        }
+
+        List<NotificationLimit> notificationLimits = DbHelperExecutor.getNotificationsByCodesAsync(AppDatabase.getDatabase(this.getContext()), notifications);
+        favouritesAdapter.setNotifications(notificationLimits);
     }
 
     @Override

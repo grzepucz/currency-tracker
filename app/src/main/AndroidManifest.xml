@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="pl.edu.agh.currencytrack">
-
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SelectToCurrencyActivity"
+            android:label="@string/title_activity_select_to_currency"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SELECT_TO_CURRENCY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/appName"
             android:theme="@style/AppTheme.NoActionBar">
@@ -28,9 +37,18 @@
         </activity>
         <activity
             android:name=".NewFavouriteActivity"
-            android:label="@string/favourites_add_label" >
+            android:label="@string/favourites_add_label">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_FAVOURITE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditNotificationActivity"
+            android:label="@string/notification_edit_label">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

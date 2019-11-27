@@ -13,6 +13,10 @@ public class ImageHelper {
         InputStream is = null;
         
         try {
+            if (!fileName.contains("png")) {
+                fileName = fileName + ".png";
+            }
+
             is = contex.getAssets().open(fileName);
         } catch (IOException e) {
             e.printStackTrace();

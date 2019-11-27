@@ -84,7 +84,7 @@ public class RatesFragment extends Fragment {
     private void createList() {
         List<FavouriteCurrency> elements = DbHelperExecutor.getAllObservedAsync(AppDatabase.getDatabase(this.getContext()));
 
-        if (elements != null) {
+        if (elements != null && rates.isEmpty()) {
             elements.stream().map(i -> ratesShorts.add(i.getShortName())).collect(Collectors.toList());
 
             Gson gson = new GsonBuilder()

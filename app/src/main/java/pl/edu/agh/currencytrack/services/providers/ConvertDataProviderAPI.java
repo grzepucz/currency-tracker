@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface ConvertDataProviderApi {
+public interface ConvertDataProviderAPI {
     @POST("convert")
     Call<ConvertResponse> convertFromTo(
             @Query("access_key") String secret,

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "b282bef9990944eb24a8afc55a6f923e",
+    "identityHash": "52f6de141a7d0b83527a112f6871502a",
     "entities": [
       {
         "tableName": "favourites",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `short_name` TEXT, `long_name` TEXT, `icon` TEXT, `observed` INTEGER, `isChecked` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `short_name` TEXT, `long_name` TEXT, `icon` TEXT, `observed` INTEGER)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -37,12 +37,6 @@
             "columnName": "observed",
             "affinity": "INTEGER",
             "notNull": false
-          },
-          {
-            "fieldPath": "isChecked",
-            "columnName": "isChecked",
-            "affinity": "INTEGER",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -53,12 +47,68 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "notification",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`notifyId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `short_name` TEXT, `to_currency` TEXT, `limit` REAL, `notify` INTEGER, FOREIGN KEY(`notifyId`) REFERENCES `favourites`(`uid`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "notifyId",
+            "columnName": "notifyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "short_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toCurrency",
+            "columnName": "to_currency",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "limit",
+            "columnName": "limit",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shouldNotify",
+            "columnName": "notify",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "notifyId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "favourites",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "notifyId"
+            ],
+            "referencedColumns": [
+              "uid"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b282bef9990944eb24a8afc55a6f923e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '52f6de141a7d0b83527a112f6871502a')"
     ]
   }
 }

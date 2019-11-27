@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import lombok.Getter;
 import pl.edu.agh.currencytrack.models.ConvertResponse;
-import pl.edu.agh.currencytrack.services.providers.ConvertDataProviderApi;
+import pl.edu.agh.currencytrack.services.providers.ConvertDataProviderAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +26,7 @@ public class ConvertController extends Controller implements Callback<ConvertRes
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        ConvertDataProviderApi fixer = retrofit.create(ConvertDataProviderApi.class);
+        ConvertDataProviderAPI fixer = retrofit.create(ConvertDataProviderAPI.class);
 
         Call<ConvertResponse> call = fixer.convertFromTo(this.secret, from, to, amount);
         call.enqueue(this);
@@ -42,7 +42,7 @@ public class ConvertController extends Controller implements Callback<ConvertRes
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        ConvertDataProviderApi fixer = retrofit.create(ConvertDataProviderApi.class);
+        ConvertDataProviderAPI fixer = retrofit.create(ConvertDataProviderAPI.class);
 
         Call<ConvertResponse> call = fixer.convertFromToWithDate(this.secret, from, to, amount, date);
         call.enqueue(this);

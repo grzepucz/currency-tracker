@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
         android:layout_margin="8dp"
-        android:text="@string/add_selected" />
+        android:text="@string/next_step" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouritesEditRecyclerView"
