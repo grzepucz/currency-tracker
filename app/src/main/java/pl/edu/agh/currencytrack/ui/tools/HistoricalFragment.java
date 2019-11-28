@@ -1,33 +1,93 @@
 package pl.edu.agh.currencytrack.ui.tools;
 
+import androidx.annotation.RequiresApi;
+
+import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import pl.edu.agh.currencytrack.R;
+import pl.edu.agh.currencytrack.data.AppDatabase;
+import pl.edu.agh.currencytrack.data.DbHelperExecutor;
+import pl.edu.agh.currencytrack.data.FavouriteCurrency;
+import pl.edu.agh.currencytrack.data.NotificationLimit;
 
-public class ToolsFragment extends Fragment {
+public class HistoricalFragment extends Fragment {
+    public static HistoricalFragment newInstance() {
+        return new HistoricalFragment();
+    }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+    private String pickedDate;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        this.setHasOptionsMenu(false);
+
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.pickedDate = formatter.format(now);
+
+        View rootView = inflater.inflate(R.layout.fragment_historical, container, false);
+
+        CalendarView calendar = rootView.findViewById(R.id.calendarView);
+        Button historical = rootView.findViewById(R.id.btnGetHistorical);
+
+        calendar.setDate(now.getTime());
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                String monthStr = month < 10 ? "0" + month : String.valueOf(month);
+                String dayStr = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                pickedDate = year + "-" + monthStr + "-" + dayStr;
             }
         });
-        return root;
+
+        historical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.HISTORICAL");
+                intent.putExtra("dateString", pickedDate);
+                startActivity(intent);
+            }
+        });
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@Nullable Menu menu, @Nullable MenuInflater inflater) {
+        inflater.inflate(R.menu.favourites_menu, menu);
     }
 }

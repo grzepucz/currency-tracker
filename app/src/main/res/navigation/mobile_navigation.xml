@@ -25,9 +25,9 @@
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="pl.edu.agh.currencytrack.ui.tools.ToolsFragment"
+        android:name="pl.edu.agh.currencytrack.ui.tools.HistoricalFragment"
         android:label="@string/menu_historical"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_historical" />
 
     <fragment
         android:id="@+id/nav_share"

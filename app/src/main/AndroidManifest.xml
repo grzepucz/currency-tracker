@@ -16,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".HistoricalActivity"
+            android:label="@string/title_activity_historical"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.HISTORICAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SelectToCurrencyActivity"
             android:label="@string/title_activity_select_to_currency"
             android:theme="@style/AppTheme.NoActionBar">

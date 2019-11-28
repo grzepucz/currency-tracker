@@ -73,10 +73,6 @@ public class NotificationWorker extends Worker {
             @Override
             public void onResponse(Call<LatestResponse> call, Response<LatestResponse> response) {
                 if(response.isSuccessful() && response.body().success) {
-//                    System.out.println(notification.getShortName());
-//                    System.out.println(notification.getToCurrency());
-//                    System.out.println(notification.getLimit());
-//                    System.out.println(response.body().rates.get(notification.getToCurrency()));
                     if (shouldMakeNotification(notification.getLimit(), notification.getToCurrency(), response.body())) {
                         String from = notification.getShortName();
                         String to = notification.getToCurrency();
@@ -91,8 +87,6 @@ public class NotificationWorker extends Worker {
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
 
                         notificationManager.notify((int) (Math.random()*1639/4), builder.build());
-
-                        System.out.println("DOOO SOOOME WOOORK");
                     }
                 }
             }
