@@ -28,4 +28,5 @@
     <string name="channel_description">channel for notifications</string>
     <string name="get_historical">GET HISTORICAL</string>
     <string name="title_activity_historical">HistoricalActivity</string>
+    <string name="title_activity_convert">ConvertActivity</string>
 </resources>

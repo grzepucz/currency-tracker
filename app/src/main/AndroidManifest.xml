@@ -16,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ConvertActivity"
+            android:label="@string/title_activity_convert"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.CONVERT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".HistoricalActivity"
             android:label="@string/title_activity_historical"
             android:theme="@style/AppTheme.NoActionBar">

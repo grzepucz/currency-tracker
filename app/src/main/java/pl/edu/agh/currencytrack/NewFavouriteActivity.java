@@ -39,10 +39,11 @@ public class NewFavouriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_new);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+
         this.btnAddSelected = (AppCompatButton) findViewById(R.id.btnAddSelected);
         this.recyclerView = (RecyclerView) findViewById(R.id.favouritesEditRecyclerView);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
         getSupportActionBar().setTitle("Select currencies to track");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
