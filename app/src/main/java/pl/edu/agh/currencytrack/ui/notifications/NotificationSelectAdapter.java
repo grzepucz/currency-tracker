@@ -1,7 +1,6 @@
 package pl.edu.agh.currencytrack.ui.notifications;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import java.util.List;
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.FavouriteCurrency;
 import pl.edu.agh.currencytrack.data.ImageHelper;
-
-import static android.app.Activity.RESULT_OK;
 
 public class NotificationSelectAdapter extends RecyclerView.Adapter<NotificationSelectAdapter.SingleViewHolder> {
 

@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pl.edu.agh.currencytrack.BuildConfig;
 import pl.edu.agh.currencytrack.R;
-import pl.edu.agh.currencytrack.controllers.LatestController;
 import pl.edu.agh.currencytrack.data.AppDatabase;
 import pl.edu.agh.currencytrack.data.DbHelperExecutor;
 import pl.edu.agh.currencytrack.data.FavouriteCurrency;
@@ -40,12 +40,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RatesFragment extends Fragment {
 
     private RatesAdapter ratesAdapter;
-    private RecyclerView ratesRecyclerView;
-    private LatestController controller = new LatestController();
     private List<LatestResponse> rates = new ArrayList<>();
     private List<String> ratesShorts = new ArrayList<>();
-    private AppDatabase mDb;
-    String secret = "048fdb45f003ea89518104c677d4cf0f";
+    private String secret = BuildConfig.API_SECRET;
 
     public static RatesFragment newInstance() {
         return new RatesFragment();
@@ -57,7 +54,6 @@ public class RatesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_rates, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.ratesRecyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ratesAdapter = new RatesAdapter(this.getContext(), rates, ratesShorts);

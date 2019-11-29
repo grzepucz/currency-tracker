@@ -7,7 +7,6 @@
     tools:context=".EditNotificationActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

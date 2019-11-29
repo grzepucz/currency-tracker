@@ -2,26 +2,18 @@ package pl.edu.agh.currencytrack;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pl.edu.agh.currencytrack.data.ImageHelper;
-import pl.edu.agh.currencytrack.data.ListHelper;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import pl.edu.agh.currencytrack.models.ConvertResponse;
 import pl.edu.agh.currencytrack.services.providers.ConvertDataProviderAPI;
 import retrofit2.Call;
@@ -30,7 +22,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ *
+ */
 public class ConvertActivity extends AppCompatActivity {
+
 
     Button btnFromCurrency;
     Button btnToCurrency;
@@ -39,8 +35,7 @@ public class ConvertActivity extends AppCompatActivity {
     TextView resultTextView;
     Integer clicked = -1;
     Double amount = 1.0;
-
-    String secret = "048fdb45f003ea89518104c677d4cf0f";
+    private String secret = BuildConfig.API_SECRET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +96,9 @@ public class ConvertActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ConvertResponse> call, Response<ConvertResponse> response) {
                         if(response.isSuccessful() && response.body().success) {
-                            resultTextView.setText(String.valueOf(response.body().result));
+                            String result = String.valueOf(response.body().result);
+                            resultTextView.setText(result);
+                            showToast(result);
                         } else {
                             System.out.println(response.errorBody());
                         }
