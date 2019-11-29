@@ -7,7 +7,8 @@
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@drawable/text_view">
 
     <ImageView
         android:id="@+id/iconImageView"
@@ -21,14 +22,18 @@
         android:layout_width="176dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="center"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:id="@+id/longNameView"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"/>
 
 
     <ImageView

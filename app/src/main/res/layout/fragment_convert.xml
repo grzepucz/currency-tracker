@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background">
+    android:background="@drawable/convert_background"
+    android:focusable="auto">
 
 
     <Button
         android:id="@+id/btnRunConvertActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_convert"
-        android:textSize="18sp"
+        android:layout_width="259dp"
+        android:layout_height="89dp"
+        android:background="@drawable/custom_button1"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/convert_click"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063" />
 </androidx.constraintlayout.widget.ConstraintLayout>

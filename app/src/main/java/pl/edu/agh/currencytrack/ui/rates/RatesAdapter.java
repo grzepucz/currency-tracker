@@ -84,7 +84,7 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHo
             ratesView.setText(ratesList);
 
             try {
-                baseRateIconImageView.setImageBitmap(ImageHelper.ImageViaAssets(rate.base.toLowerCase() + ".png", context));
+                baseRateIconImageView.setImageBitmap(ImageHelper.ImageViaAssets(rate.base.toLowerCase(), context));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

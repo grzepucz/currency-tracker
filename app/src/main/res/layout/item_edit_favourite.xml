@@ -22,14 +22,16 @@
         android:layout_width="176dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/longNameView"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/isSelectedImageView"

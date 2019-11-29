@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import pl.edu.agh.currencytrack.BuildConfig;
 import pl.edu.agh.currencytrack.R;
@@ -70,10 +69,10 @@ public class RatesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onResume() {
         super.onResume();
-       // createList();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -81,7 +80,7 @@ public class RatesFragment extends Fragment {
         List<FavouriteCurrency> elements = DbHelperExecutor.getAllObservedAsync(AppDatabase.getDatabase(this.getContext()));
 
         if (elements != null && rates.isEmpty()) {
-            elements.stream().map(i -> ratesShorts.add(i.getShortName())).collect(Collectors.toList());
+            elements.forEach(i -> ratesShorts.add(i.getShortName()));
 
             Gson gson = new GsonBuilder()
                     .setLenient()

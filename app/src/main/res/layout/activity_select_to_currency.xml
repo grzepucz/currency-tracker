@@ -10,11 +10,14 @@
         android:id="@+id/resign"
         android:layout_width="407dp"
         android:layout_height="108dp"
-        android:text="@string/next_step"
+        android:text="@string/select_currency"
         app:layout_constraintBottom_toTopOf="@+id/notificationCurrencySelectRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="sans-serif-light"
+        android:background="@drawable/custom_button1"
+        android:textSize="30dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationCurrencySelectRecyclerView"

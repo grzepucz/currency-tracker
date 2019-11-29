@@ -10,7 +10,7 @@
         android:id="@+id/ratesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="@drawable/images"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_rate_short">
 

@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="15dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/isSelectedImageView"
