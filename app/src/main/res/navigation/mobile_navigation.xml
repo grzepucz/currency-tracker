@@ -2,32 +2,41 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="pl.edu.agh.currencytrack.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_home"
+        android:name="pl.edu.agh.currencytrack.ui.rates.RatesFragment"
+        android:label="@string/menu_rates"
+        tools:layout="@layout/fragment_rates" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="pl.edu.agh.currencytrack.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_exchange" />
+        android:id="@+id/nav_gallery"
+        android:name="pl.edu.agh.currencytrack.ui.convert.ConvertFragment"
+        android:label="@string/menu_convert"
+        tools:layout="@layout/fragment_convert" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="pl.edu.agh.currencytrack.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_favourites"
+        android:name="pl.edu.agh.currencytrack.ui.favourites.FavouritesFragment"
+        android:label="@string/menu_favourites"
+        tools:layout="@layout/fragment_favourites" />
 
     <fragment
-        android:id="@+id/navigation_favourites_list"
-        android:name="pl.edu.agh.currencytrack.ui.favourites.FavouriteItemFragment"
-        android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_favourite_item_list" />
+        android:id="@+id/nav_tools"
+        android:name="pl.edu.agh.currencytrack.ui.historical.HistoricalFragment"
+        android:label="@string/menu_historical"
+        tools:layout="@layout/fragment_historical" />
 
-    <action android:id="@+id/action_global_navigation_notifications" app:destination="@id/navigation_notifications" />
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="pl.edu.agh.currencytrack.ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="pl.edu.agh.currencytrack.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
 </navigation>

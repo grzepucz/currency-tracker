@@ -1,9 +1,27 @@
 <resources>
-    <string name="app_name">CurrencyTrack</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_favourites">Favourites</string>
-    <string name="add">Add</string>
-    <string name="delete">delete</string>
+    <string name="app_name">Currency Tracker</string>
+    <string name="nav_header_title">Currency Tracker</string>
+    <string name="nav_header_subtitle">grzechu.pe@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_favourites_edit">Edit</string>
+
+    <string name="menu_rates">Rates</string>
+    <string name="menu_convert">Convert</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_historical">Historical</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="appName">Currency Tracker</string>
+    <string name="favourites_add_label">Add currency</string>
+    <string name="notification_edit_label">Notifications</string>
+    <string name="next_step">Next step</string>
+    <string name="type_notification_limit">Type notification limit</string>
+    <string name="select_currency">Select currency</string>
+    <string name="title_activity_select_to_currency">SelectToCurrencyActivity</string>
+    <string name="update">Update</string>
+    <string name="channel_name">notificationChannel</string>
+    <string name="channel_description">channel for notifications</string>
+    <string name="get_historical">GET HISTORICAL</string>
+    <string name="title_activity_historical">HistoricalActivity</string>
+    <string name="title_activity_convert">ConvertActivity</string>
 </resources>

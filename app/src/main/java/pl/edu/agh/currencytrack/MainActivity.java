@@ -1,56 +1,95 @@
 package pl.edu.agh.currencytrack;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
-import pl.edu.agh.currencytrack.data.AppDatabase;
-import pl.edu.agh.currencytrack.data.Currency;
-import pl.edu.agh.currencytrack.ui.favourites.FavouriteItemFragment;
-import pl.edu.agh.currencytrack.ui.favourites.dummy.FavouriteContent;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements FavouriteItemFragment.OnListFragmentInteractionListener {
+import java.time.Duration;
 
-    private AppDatabase db;
+import pl.edu.agh.currencytrack.services.NotificationWorker;
 
+public class MainActivity extends AppCompatActivity {
+    private String CHANNEL_ID = BuildConfig.CHANNEL_ID;
+    private AppBarConfiguration mAppBarConfiguration;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "What would You do if You would found 100$ on the street?", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
-//        LatestController latestController = new LatestController();
-//        latestController.processLatestWithSymbolsRequest();
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_favourites_list)
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_favourites,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                .setDrawerLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //checkRates();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void checkRates() {
+        createNotificationChannel();
+        PeriodicWorkRequest uploadWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class, Duration.ofHours(1)).build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(uploadWorkRequest);
+    }
+
+    public void addNewFavouriteAction(MenuItem item) {
+        Intent intent = new Intent("android.intent.action.NEW_FAVOURITE");
+        startActivity(intent);
     }
 
     @Override
-    public void onListFragmentInteraction(FavouriteContent.FavouriteItem item) {
-
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
-    private void loadDatabase() {
-        this.db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "CurrencyTracker").enableMultiInstanceInvalidation().build();
-
-        Currency item = new Currency("EUR", "Euro", "euro.png");
-        Currency item2 = new Currency("USD", "Dolar amerykański", "usd.png");
-        db.currencyDao().insertAll(item, item2);
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
+
 }
