@@ -2,7 +2,6 @@ package pl.edu.agh.currencytrack;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ConvertActivity extends AppCompatActivity {
 
-
     Button btnFromCurrency;
     Button btnToCurrency;
     Button btnConvert;
@@ -51,65 +49,57 @@ public class ConvertActivity extends AppCompatActivity {
         this.amountEditText = (EditText) findViewById(R.id.amountEditText);
         this.resultTextView = (TextView) findViewById(R.id.convertResult);
 
-        btnFromCurrency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.SELECT_TO_CURRENCY");
-                startActivityForResult(intent, 1);
-                clicked = 0;
-            }
+        btnFromCurrency.setOnClickListener(view -> {
+            Intent intent = new Intent("android.intent.action.SELECT_TO_CURRENCY");
+            startActivityForResult(intent, 1);
+            clicked = 0;
         });
 
-        btnToCurrency.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent("android.intent.action.SELECT_TO_CURRENCY");
-                startActivityForResult(intent, 1);
-                clicked = 1;
-            }
+        btnToCurrency.setOnClickListener(view -> {
+            Intent intent = new Intent("android.intent.action.SELECT_TO_CURRENCY");
+            startActivityForResult(intent, 1);
+            clicked = 1;
         });
 
         amountEditText.setText(String.valueOf(amount));
 
-        btnConvert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Gson gson = new GsonBuilder()
-                        .setLenient()
-                        .create();
+        btnConvert.setOnClickListener(v -> {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://data.fixer.io/api/")
-                        .addConverterFactory(GsonConverterFactory.create(gson))
-                        .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://data.fixer.io/api/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
 
-                ConvertDataProviderAPI fixer = retrofit.create(ConvertDataProviderAPI.class);
+            ConvertDataProviderAPI fixer = retrofit.create(ConvertDataProviderAPI.class);
 
-                Call<ConvertResponse> call = fixer.convertFromTo(
-                        secret,
-                        btnFromCurrency.getText().toString(),
-                        btnToCurrency.getText().toString(),
-                        Double.valueOf(amountEditText.getText().toString())
-                );
+            Call<ConvertResponse> call = fixer.convertFromTo(
+                    secret,
+                    btnFromCurrency.getText().toString(),
+                    btnToCurrency.getText().toString(),
+                    Double.valueOf(amountEditText.getText().toString())
+            );
 
-                call.enqueue(new Callback<ConvertResponse>() {
-                    @Override
-                    public void onResponse(Call<ConvertResponse> call, Response<ConvertResponse> response) {
-                        if(response.isSuccessful() && response.body().success) {
-                            String result = String.valueOf(response.body().result);
-                            resultTextView.setText(result);
-                            showToast(result);
-                        } else {
-                            System.out.println(response.errorBody());
-                        }
+            call.enqueue(new Callback<ConvertResponse>() {
+                @Override
+                public void onResponse(Call<ConvertResponse> call, Response<ConvertResponse> response) {
+                    if(response.isSuccessful() && response.body().success) {
+                        String result = String.valueOf(response.body().result) + " " + btnToCurrency.getText();
+                        resultTextView.setText(result);
+                        result = amountEditText.getText() + " " + btnFromCurrency.getText() + " = " + result;
+                        showToast(result);
+                    } else {
+                        System.out.println(response.errorBody());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<ConvertResponse> call, Throwable t) {
-
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call<ConvertResponse> call, Throwable t) {
+                    //
+                }
+            });
         });
     }
 

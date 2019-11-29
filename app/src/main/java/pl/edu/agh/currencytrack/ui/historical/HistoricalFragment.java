@@ -1,4 +1,4 @@
-package pl.edu.agh.currencytrack.ui.tools;
+package pl.edu.agh.currencytrack.ui.historical;
 
 import androidx.annotation.RequiresApi;
 
@@ -10,9 +10,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,15 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import pl.edu.agh.currencytrack.R;
-import pl.edu.agh.currencytrack.data.AppDatabase;
-import pl.edu.agh.currencytrack.data.DbHelperExecutor;
-import pl.edu.agh.currencytrack.data.FavouriteCurrency;
-import pl.edu.agh.currencytrack.data.NotificationLimit;
 
 public class HistoricalFragment extends Fragment {
     public static HistoricalFragment newInstance() {

@@ -1,22 +1,20 @@
 package pl.edu.agh.currencytrack.ui.favourites;
 
-import androidx.annotation.RequiresApi;
-
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +28,8 @@ import pl.edu.agh.currencytrack.data.NotificationLimit;
 public class FavouritesFragment extends Fragment {
 
     private FavouritesAdapter favouritesAdapter;
-    private RecyclerView favouritesRecyclerView;
     private List<FavouriteCurrency> favourites = new ArrayList<>();
     private List<NotificationLimit> notifications = new ArrayList<>();
-    private AppDatabase mDb;
 
     public static FavouritesFragment newInstance() {
         return new FavouritesFragment();
@@ -46,7 +42,7 @@ public class FavouritesFragment extends Fragment {
         this.setHasOptionsMenu(true);
 
         View rootView = inflater.inflate(R.layout.fragment_favourites, container, false);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.favouritesRecyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.favouritesRecyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -75,17 +71,25 @@ public class FavouritesFragment extends Fragment {
         List<FavouriteCurrency> favourites = DbHelperExecutor.getAllObservedAsync(AppDatabase.getDatabase(this.getContext()));
         favouritesAdapter.setFavourites(favourites);
 
-        List<String> notifications = new ArrayList<>();
-        for (FavouriteCurrency i : favourites) {
-            notifications.add(i.getShortName());
-        }
+        try {
+            List<String> notifications = new ArrayList<>();
+            for (FavouriteCurrency i : favourites) {
+                notifications.add(i.getShortName());
+            }
 
-        List<NotificationLimit> notificationLimits = DbHelperExecutor.getNotificationsByCodesAsync(AppDatabase.getDatabase(this.getContext()), notifications);
-        favouritesAdapter.setNotifications(notificationLimits);
+            List<NotificationLimit> notificationLimits = DbHelperExecutor.getNotificationsByCodesAsync(AppDatabase.getDatabase(this.getContext()), notifications);
+            favouritesAdapter.setNotifications(notificationLimits);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void onCreateOptionsMenu(@Nullable Menu menu, @Nullable MenuInflater inflater) {
-        inflater.inflate(R.menu.favourites_menu, menu);
+        try {
+            inflater.inflate(R.menu.favourites_menu, menu);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

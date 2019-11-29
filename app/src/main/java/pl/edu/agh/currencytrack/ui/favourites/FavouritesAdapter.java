@@ -23,7 +23,7 @@ import pl.edu.agh.currencytrack.data.FavouriteCurrency;
 import pl.edu.agh.currencytrack.data.ImageHelper;
 import pl.edu.agh.currencytrack.data.NotificationLimit;
 
-public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.SingleViewHolder>  {
+public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.SingleViewHolder> {
 
     private Context context;
     private List<FavouriteCurrency> favourites;
@@ -36,14 +36,14 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Si
         this.notifications = notifications;
     }
 
-    public void setFavourites(List<FavouriteCurrency>  favourites) {
+    public void setFavourites(List<FavouriteCurrency> favourites) {
         this.favourites = new ArrayList<>();
         this.favourites = favourites;
         notifyDataSetChanged();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void setNotifications(List<NotificationLimit>  notifications) {
+    public void setNotifications(List<NotificationLimit> notifications) {
         this.notifications = new ArrayList<>();
         this.notifications = notifications;
         notifications.forEach(i -> this.notifyMap.put(i.getShortName(), i.getShouldNotify()));
@@ -89,20 +89,21 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Si
             shortNameView.setText(favourite.getShortName());
             longNameView.setText(favourite.getLongName());
             iconImageView.setImageBitmap(ImageHelper.ImageViaAssets(favourite.getIcon().toLowerCase(), context));
-            shouldNotifyImageView.setVisibility(
-                    notifyMap.containsKey(favourite.getShortName()) && (notifyMap.get(favourite.getShortName()) == true)
-                            ? View.VISIBLE
-                            : View.GONE
-                    );
+            try {
+                shouldNotifyImageView.setVisibility(
+                        notifyMap.containsKey(favourite.getShortName()) && (notifyMap.get(favourite.getShortName()) == true)
+                                ? View.VISIBLE
+                                : View.GONE
+                );
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent("android.intent.action.EDIT_NOTIFICATION");
-                    context.startActivity(intent
-                            .putExtra("SHORT", favourite.getShortName())
-                    );
-                }
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent("android.intent.action.EDIT_NOTIFICATION");
+                context.startActivity(intent
+                        .putExtra("SHORT", favourite.getShortName())
+                );
             });
         }
     }

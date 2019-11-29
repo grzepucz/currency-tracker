@@ -22,8 +22,6 @@ public class NotificationSelectAdapter extends RecyclerView.Adapter<Notification
     private Context context;
     private List<FavouriteCurrency> currencies;
     private String selectedName;
-    // if checkedPosition = -1, there is no default selection
-    // if checkedPosition = 0, 1st item is selected by default
     private int checkedPosition = 0;
 
 
@@ -32,12 +30,12 @@ public class NotificationSelectAdapter extends RecyclerView.Adapter<Notification
         this.currencies = currencies;
     }
 
-    private void setSelectedShort(String name) {
-        this.selectedName = name;
-    }
-
     public String getSelectedShort() {
         return this.selectedName;
+    }
+
+    private void setSelectedShort(String name) {
+        this.selectedName = name;
     }
 
     public void setElements(List<FavouriteCurrency> currencies) {
@@ -60,6 +58,10 @@ public class NotificationSelectAdapter extends RecyclerView.Adapter<Notification
     @Override
     public int getItemCount() {
         return currencies.size();
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this.context, msg, Toast.LENGTH_SHORT).show();
     }
 
     class SingleViewHolder extends RecyclerView.ViewHolder {
@@ -89,23 +91,16 @@ public class NotificationSelectAdapter extends RecyclerView.Adapter<Notification
                 }
             }
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    isSelectedImageView.setVisibility(View.VISIBLE);
-                    if (checkedPosition != getAdapterPosition()) {
-                        notifyItemChanged(checkedPosition);
-                        checkedPosition = getAdapterPosition();
-                        setSelectedShort(favourite.getShortName());
-                        showToast("Selected " + favourite.getLongName());
-                    }
+            itemView.setOnClickListener(view -> {
+                isSelectedImageView.setVisibility(View.VISIBLE);
+                if (checkedPosition != getAdapterPosition()) {
+                    notifyItemChanged(checkedPosition);
+                    checkedPosition = getAdapterPosition();
+                    setSelectedShort(favourite.getShortName());
+                    showToast("Selected " + favourite.getLongName());
                 }
             });
         }
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(this.context, msg, Toast.LENGTH_SHORT).show();
     }
 
 }

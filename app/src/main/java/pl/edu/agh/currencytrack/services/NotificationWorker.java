@@ -16,10 +16,10 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pl.edu.agh.currencytrack.BuildConfig;
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.AppDatabase;
 import pl.edu.agh.currencytrack.data.DbHelperExecutor;
-import pl.edu.agh.currencytrack.data.ListHelper;
 import pl.edu.agh.currencytrack.data.NotificationLimit;
 import pl.edu.agh.currencytrack.models.LatestResponse;
 import pl.edu.agh.currencytrack.services.providers.LatestDataProviderAPI;
@@ -31,8 +31,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NotificationWorker extends Worker {
 
-    private String CHANNEL_ID = "notification";
-    private String secret = "048fdb45f003ea89518104c677d4cf0f";
+    private String CHANNEL_ID = BuildConfig.CHANNEL_ID;
+    private String secret = BuildConfig.API_SECRET;
 
     public NotificationWorker(
             @NonNull Context context,
@@ -97,7 +97,13 @@ public class NotificationWorker extends Worker {
             }
 
             private Boolean shouldMakeNotification(Double limit, String key, LatestResponse response) {
-                return response.rates.get(key) >= limit;
+                try {
+                    return response.rates.get(key) >= limit;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                return false;
             }
         });
     }

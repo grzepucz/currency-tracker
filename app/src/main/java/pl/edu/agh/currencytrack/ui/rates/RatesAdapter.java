@@ -14,25 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.ImageHelper;
 import pl.edu.agh.currencytrack.models.LatestResponse;
 
-public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHolder>  {
+public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHolder> {
 
     private Context context;
     private List<LatestResponse> rates;
-    private List<String> shorts;
 
-    public RatesAdapter(Context context, List<LatestResponse> rates, List<String> shorts) {
+    public RatesAdapter(Context context, List<LatestResponse> rates) {
         this.context = context;
         this.rates = rates;
-        this.shorts = shorts;
     }
 
-    public void setLatests(List<LatestResponse>  rates) {
+    public void setLatests(List<LatestResponse> rates) {
         this.rates = new ArrayList<>();
         this.rates = rates;
         notifyDataSetChanged();
@@ -72,29 +69,31 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.SingleViewHo
         @RequiresApi(api = Build.VERSION_CODES.N)
         void bind(final LatestResponse rate) {
             baseNameView.setText(rate != null ? rate.base : "undefined");
-            baseRateIconImageView.setImageBitmap(ImageHelper.ImageViaAssets(rate.base.toLowerCase() + ".png", context));
 
             List<String> list = new ArrayList<>();
             rate.rates.forEach((k, v) -> {
-                list.add(k + ":      " + v.toString() + System.getProperty ("line.separator") + System.getProperty ("line.separator"));
+                list.add(k + ":      " + v.toString() + System.getProperty("line.separator") + System.getProperty("line.separator"));
             });
 
             String ratesList = "";
 
-            for (int i=0; i<list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 ratesList = ratesList + list.get(i);
             }
 
             ratesView.setText(ratesList);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (ratesView.getVisibility() == View.GONE) {
-                        ratesView.setVisibility(View.VISIBLE);
-                    } else {
-                        ratesView.setVisibility(View.GONE);
-                    }
+            try {
+                baseRateIconImageView.setImageBitmap(ImageHelper.ImageViaAssets(rate.base.toLowerCase() + ".png", context));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            itemView.setOnClickListener(view -> {
+                if (ratesView.getVisibility() == View.GONE) {
+                    ratesView.setVisibility(View.VISIBLE);
+                } else {
+                    ratesView.setVisibility(View.GONE);
                 }
             });
         }

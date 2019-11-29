@@ -56,7 +56,7 @@ public class RatesFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.ratesRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ratesAdapter = new RatesAdapter(this.getContext(), rates, ratesShorts);
+        ratesAdapter = new RatesAdapter(this.getContext(), rates);
         recyclerView.setAdapter(ratesAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         createList();

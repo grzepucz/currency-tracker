@@ -1,4 +1,4 @@
-package pl.edu.agh.currencytrack.ui.tools;
+package pl.edu.agh.currencytrack.ui.historical;
 
 import android.content.Context;
 import android.os.Build;
@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import pl.edu.agh.currencytrack.R;
 import pl.edu.agh.currencytrack.data.ImageHelper;
 import pl.edu.agh.currencytrack.models.HistoricalResponse;
-import pl.edu.agh.currencytrack.models.LatestResponse;
 
 public class HistoricalAdapter extends RecyclerView.Adapter<HistoricalAdapter.SingleViewHolder>  {
 

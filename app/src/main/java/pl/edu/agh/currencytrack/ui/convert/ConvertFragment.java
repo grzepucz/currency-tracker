@@ -19,14 +19,11 @@ public class ConvertFragment extends Fragment {
         this.setHasOptionsMenu(false);
 
         View rootView = inflater.inflate(R.layout.fragment_convert, container, false);
-        Button runConvert = (Button) rootView.findViewById(R.id.btnRunConvertActivity);
+        Button runConvert = rootView.findViewById(R.id.btnRunConvertActivity);
 
-        runConvert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.CONVERT");
-                startActivity(intent);
-            }
+        runConvert.setOnClickListener(v -> {
+            Intent intent = new Intent("android.intent.action.CONVERT");
+            startActivity(intent);
         });
 
         return rootView;

@@ -1,16 +1,11 @@
 package pl.edu.agh.currencytrack;
 
-import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +27,7 @@ import java.time.Duration;
 import pl.edu.agh.currencytrack.services.NotificationWorker;
 
 public class MainActivity extends AppCompatActivity {
-    private String CHANNEL_ID = "notification";
+    private String CHANNEL_ID = BuildConfig.CHANNEL_ID;
     private AppBarConfiguration mAppBarConfiguration;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -43,13 +38,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "What would You do if You would found 100$ on the street?", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "What would You do if You would found 100$ on the street?", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
