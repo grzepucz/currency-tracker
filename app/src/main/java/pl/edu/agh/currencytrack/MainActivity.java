@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        //checkRates();
+        checkRates();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
