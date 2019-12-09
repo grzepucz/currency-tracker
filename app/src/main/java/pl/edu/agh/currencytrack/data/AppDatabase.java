@@ -61,10 +61,10 @@ public abstract class AppDatabase extends RoomDatabase {
      */
     private static AppDatabase.Callback sAppDatabaseCallback = new AppDatabase.Callback() {
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
-            databaseWriteExecutor.execute(() -> {
+//            databaseWriteExecutor.execute(() -> {
 //                FavouritesCurrencyDAO currencyDao = INSTANCE.currencyDao();
 //                NotificationLimitDAO notificationLimitDao = INSTANCE.notificationLimitDao();
 //
@@ -248,20 +248,20 @@ public abstract class AppDatabase extends RoomDatabase {
 //                        new NotificationLimit("PLN","EUR", 5.2,true),
 //                        new NotificationLimit("EUR", "USD", 2.1,false)
 //                );
-
-                System.out.println("CREATED!!!");
-            });
+//
+//                System.out.println("CREATED!!!");
+//            });
         }
 
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-
-            databaseWriteExecutor.execute(() -> {
-                Log.d(AppDatabase.TAG, "DB mounted");
-                Log.d(AppDatabase.TAG, "CURRENCIES: " + INSTANCE.currencyDao().countRows());
-                Log.d(AppDatabase.TAG, "LIMITS: " + INSTANCE.notificationLimitDao().countRows());
-            });
-        }
+//        @Override
+//        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+//            super.onOpen(db);
+//
+//            databaseWriteExecutor.execute(() -> {
+//                Log.d(AppDatabase.TAG, "DB mounted");
+//                Log.d(AppDatabase.TAG, "CURRENCIES: " + INSTANCE.currencyDao().countRows());
+//                Log.d(AppDatabase.TAG, "LIMITS: " + INSTANCE.notificationLimitDao().countRows());
+//            });
+//       }
     };
 }

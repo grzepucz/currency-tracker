@@ -59,9 +59,12 @@ public class NewFavouriteActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateItems(List<String> indexes) {
-        DbHelperExecutor.updateElementListObservationAsync(AppDatabase.getDatabase(this), indexes);
-        createList();
+        if (favourites.stream().noneMatch(i -> indexes.contains(i.getShortName()))) {
+            DbHelperExecutor.updateElementListObservationAsync(AppDatabase.getDatabase(this), indexes);
+            createList();
+        }
     }
 
     private void createList() {

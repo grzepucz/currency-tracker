@@ -7,6 +7,7 @@
 
     <string name="menu_rates">Rates</string>
     <string name="menu_convert">Convert</string>
+    <string name="convert_click">Click to start!</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_historical">Historical</string>
     <string name="menu_share">Share</string>
@@ -16,12 +17,14 @@
     <string name="notification_edit_label">Notifications</string>
     <string name="next_step">Next step</string>
     <string name="type_notification_limit">Type notification limit</string>
-    <string name="select_currency">Select currency</string>
+    <string name="select_currency">Select currency to track</string>
     <string name="title_activity_select_to_currency">SelectToCurrencyActivity</string>
     <string name="update">Update</string>
     <string name="channel_name">notificationChannel</string>
     <string name="channel_description">channel for notifications</string>
-    <string name="get_historical">GET HISTORICAL</string>
     <string name="title_activity_historical">HistoricalActivity</string>
     <string name="title_activity_convert">ConvertActivity</string>
+    <string name="amount">How much?</string>
+    <string name="update_currency">Update your favourites!</string>
+    <string name="get_historical">Get historical</string>
 </resources>

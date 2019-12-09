@@ -8,11 +8,23 @@
     tools:context=".ConvertActivity"
     tools:showIn="@layout/activity_convert">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="69dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnTo"
+        app:layout_constraintStart_toEndOf="@+id/btnFrom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/images2" />
+
     <Button
         android:id="@+id/btnFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="141dp"
+        android:layout_height="54dp"
+        android:background="@drawable/custom_button1"
+        android:fontFamily="sans-serif-light"
         android:text="From"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/btnTo"
         app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,23 +32,27 @@
 
     <Button
         android:id="@+id/btnTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_width="131dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/custom_button1"
         android:text="to"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-light"/>
 
     <EditText
         android:id="@+id/amountEditText"
-        android:layout_width="344dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="250dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="128dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFrom" />
 
@@ -45,15 +61,37 @@
         android:layout_width="217dp"
         android:layout_height="125dp"
         app:layout_constraintBottom_toTopOf="@+id/btnConvert"
-        app:layout_constraintTop_toBottomOf="@+id/amountEditText"
-        tools:layout_editor_absoluteX="97dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
 
     <Button
         android:id="@+id/btnConvert"
         android:layout_width="414dp"
         android:layout_height="59dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/custom_button1"
         android:text="@string/menu_convert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="sans-serif-light"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="175dp"
+        android:layout_height="47dp"
+        android:background="@drawable/custom_button1"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="@string/amount"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/amountEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.905" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
